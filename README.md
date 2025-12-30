@@ -1,5 +1,9 @@
 # 🚀 API de Carteira Digital (Mini-Ledger)
 
+> ⚠️ **Status: Em Desenvolvimento**
+>
+> Este projeto está sendo construído ativamente. Algumas funcionalidades podem ainda não estar completas.
+
 > Um sistema robusto de transações financeiras simulando o núcleo de um banco digital.
 
 ## 🏆 Sobre o Projeto
