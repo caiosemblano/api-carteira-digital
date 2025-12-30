@@ -1,100 +1,96 @@
-# API Carteira Digital
+# 🚀 API de Carteira Digital (Mini-Ledger)
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+> Um sistema robusto de transações financeiras simulando o núcleo de um banco digital.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 🏆 Sobre o Projeto
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este projeto consiste em uma API RESTful de alta performance que simula as operações essenciais de uma carteira digital (como PicPay ou Nubank). O foco principal não é a interface do usuário, mas sim a **robustez**, **consistência** e **segurança** do back-end.
 
-## Description
+O objetivo é demonstrar competências avançadas em desenvolvimento de software, resolvendo problemas reais como:
+- **Concorrência e Race Conditions:** Garantir que o usuário não gaste o mesmo dinheiro duas vezes simultaneamente.
+- **Transações ACID:** Assegurar integridade dos dados financeiras (atomicidade, consistência, isolamento e durabilidade).
+- **Escalabilidade:** Arquitetura preparada para lidar com alto volume de requisições.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠️ Tech Stack
 
-## Project setup
+Este projeto foi desenvolvido utilizando tecnologias modernas e amplamente adotadas no mercado:
 
-\`\`\`bash
-$ npm install
-\`\`\`
+- **Linguagem:** TypeScript 5+
+- **Framework:** NestJS
+- **Banco de Dados:** PostgreSQL
+- **ORM:** Prisma / TypeORM (Configurável)
+- **Containerização:** Docker & Docker Compose
+- **Testes:** Jest & Supertest
 
-## Compile and run the project
+## 📋 Funcionalidades
 
-\`\`\`bash
-# development
-$ npm run start
+### 1. Módulo de Usuários (Auth)
+- Cadastro de usuários (Pessoa Física e Lojistas).
+- Autenticação via JWT (JSON Web Token).
+- Hash de senha robusto (Bcrypt/Argon2).
+- Validação de dados (CPF/CNPJ e Email únicos).
 
-# watch mode
-$ npm run start:dev
+### 2. Módulo de Carteira (Wallet)
+- Criação automática de carteira ao registrar usuário.
+- Consulta de saldo.
+- Operações de depósito/saque.
 
-# production mode
-$ npm run start:prod
-\`\`\`
+### 3. Módulo de Transações (Core) 🔥
+Endpoint `/transfer` para transferência de valores entre usuários.
+- **Regras de Negócio:**
+  - Validação de saldo suficiente.
+  - Consulta a serviço autorizador externo (Mock) antes da efetivação.
+  - Operação atômica (Transação de Banco de Dados).
+  - Impede transferências para a mesma conta.
 
-## Run tests
+### 4. Diferenciais Técnicos (O "Pulo do Gato")
+- **Tratamento de Concorrência:** Implementação de Locks (Otimista/Pessimista) para evitar *Race Conditions* e gastos duplos.
+- **Notificações Assíncronas:** Uso de filas (Queue) para envio de notificações após o sucesso da transação, garantindo baixa latência na resposta da API.
+- **Documentação:** API documentada com Swagger/OpenAPI.
 
-\`\`\`bash
-# unit tests
-$ npm run test
+## 🚀 Como Rodar
 
-# e2e tests
-$ npm run test:e2e
+### Pré-requisitos
+- Docker e Docker Compose instalados.
 
-# test coverage
-$ npm run test:cov
-\`\`\`
+### Passo a Passo
 
-## Deployment
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/caiosemblano/api-carteira-digital.git
+   cd wallet-api
+   ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+2. **Suba o ambiente com Docker:**
+   ```bash
+   docker-compose up -d
+   ```
+   > Este comando irá provisionar o Banco de Dados (PostgreSQL) e a Aplicação.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+3. **Acesse a Documentação da API:**
+   Abra seu navegador em: `http://localhost:3000/api` (Swagger)
 
-\`\`\`bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-\`\`\`
+## 🗺️ Roteiro de Desenvolvimento
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+- [ ] **Modelagem de Dados:** Tabelas `Users`, `Wallets`, `Transactions`.
+- [ ] **Configuração:** Docker com Postgres.
+- [ ] **CRUD Básico:** Usuários e Carteiras.
+- [ ] **Core:** Implementação de transferências com Transactions (BEGIN/COMMIT).
+- [ ] **Segurança:** Autenticação e Autorização.
+- [ ] **Concorrência:** Testes de carga e implementação de Locks.
+- [ ] **Mensageria:** Módulo de notificações separado.
 
-## Resources
+## 🧪 Testes
 
-Check out a few resources that may come in handy when working with NestJS:
+Para rodar os testes automatizados:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+# Testes unitários
+npm run test
 
-## Support
+# Testes e2e (integração)
+npm run test:e2e
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+Desenvolvido com 💙 para fins de estudo e aprimoramento técnico.
