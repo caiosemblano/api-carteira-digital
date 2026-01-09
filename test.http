@@ -1,0 +1,37 @@
+### Create User (Payer)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "fullName": "João Payer",
+    "cpf": "111.111.111-11",
+    "email": "joao@example.com",
+    "password": "password123",
+    "wallet": {
+        "balance": 1000 // 10 reais
+    }
+}
+
+### Create User (Payee)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "fullName": "Maria Payee",
+    "cpf": "222.222.222-22",
+    "email": "maria@example.com",
+    "password": "password123",
+    "wallet": {
+        "balance": 0
+    }
+}
+
+### Make Transaction
+POST http://localhost:3000/transaction
+Content-Type: application/json
+
+{
+    "value": 100,
+    "payer": "ID_DO_PAYER_AQUI",
+    "payee": "ID_DO_PAYEE_AQUI"
+}
