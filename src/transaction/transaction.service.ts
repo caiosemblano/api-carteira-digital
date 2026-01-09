@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service'; // Você precisará criar esse serviço básico
+import { PrismaService } from "src/prisma/prisma.service"; // Você precisará criar esse serviço básico
 
 @Injectable()
 export class TransactionService {
