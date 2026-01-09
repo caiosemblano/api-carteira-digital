@@ -11,7 +11,7 @@ Este projeto consiste em uma API RESTful de alta performance que simula as opera
 ### Destaques da Implementação (O "Pulo do Gato") 🐱
 
 1.  **Transações ACID Reais**: O `TransactionService` utiliza `prisma.$transaction()` interativo. Isso garante que a validação de saldo, o débito no pagador, o crédito no recebedor e a criação do registro histórico aconteçam **tudo ou nada**. Se o banco falhar no meio do caminho, o dinheiro não some.
-2.  **Isolamento e Atomicidade**: Usamos *Atomic Updates* (`balance: { start decrement: amount }`) do Prisma/Postgres. Isso previne *Race Conditions* (condição de corrida) onde duas requisições simultâneas poderiam gastar o mesmo saldo duas vezes. O banco serializa essas operações nativamente.
+2.  **Isolamento e Atomicidade**: Usei *Atomic Updates* (`balance: { start decrement: amount }`) do Prisma/Postgres. Isso previne *Race Conditions* (condição de corrida) onde duas requisições simultâneas poderiam gastar o mesmo saldo duas vezes. O banco serializa essas operações nativamente.
 3.  **Schema Seguro**: Tipagem forte no banco (`Int` para centavos, `Unique` para CPF/Email) garante integridade de dados na camada mais baixa.
 
 ## 🛠️ Tech Stack
